@@ -13,6 +13,7 @@ import (
 	appsv1 "k8s.io/api/apps/v1"
 	corev1 "k8s.io/api/core/v1"
 	discoveryv1 "k8s.io/api/discovery/v1"
+	"k8s.io/apimachinery/pkg/apis/meta/v1/unstructured"
 	"k8s.io/apimachinery/pkg/labels"
 	"k8s.io/client-go/rest"
 	"k8s.io/klog/v2"
@@ -144,6 +145,9 @@ func New(ctx context.Context, restCfg *rest.Config, svrCfg *ec.Server, resources
 				UnsafeDisableDeepCopy: ptr.To(true),
 			},
 			&appsv1.DaemonSet{}: {
+				UnsafeDisableDeepCopy: ptr.To(true),
+			},
+			&unstructured.Unstructured{}: {
 				UnsafeDisableDeepCopy: ptr.To(true),
 			},
 		}
